@@ -12,7 +12,6 @@ let simpleLightBox;
 const perPage = 40;
 let totalPages = 0;
 const options = {
-  root: null,
   rootMargin: '300px',
   threshold: 1.0,
 };
