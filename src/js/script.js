@@ -7,16 +7,17 @@ const searchForm = document.getElementById('search-form');
 const gallery = document.querySelector('.gallery');
 export { gallery };
 let query = '';
-const loadEl = document.querySelector(".js-guard")
+const loadEl = document.querySelector('.js-guard')
 let simpleLightBox;
 const perPage = 40;
-
+let totalPages = 0;
 const options = {
   root: null,
   rootMargin: '300px',
   threshold: 1.0,
 };
 let page = 1;
+
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     
@@ -30,8 +31,6 @@ searchForm.addEventListener('submit', onSearchForm);
 // Цей код дозволяє автоматично прокручувати сторінку на висоту 2 карток галереї, коли вона завантажується
 function onSearchForm(e) {
   e.preventDefault();
-  
-  
   
   query = e.currentTarget.elements.searchQuery.value.trim();
   gallery.innerHTML = '';
@@ -57,12 +56,8 @@ function onSearchForm(e) {
           return;
         }
         observer.observe(loadEl);
-        
-  
         simpleLightBox = new SimpleLightbox('.gallery a').refresh();
-        
           Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images.`);
-       
       }
     } catch(error) {
       console.log(error.massage);
@@ -72,9 +67,6 @@ function onSearchForm(e) {
   }
   makeMarkup(query, page, perPage);
 }
-
-
-
 
 function onloadMore() {
   page += 1;
@@ -91,25 +83,18 @@ function onloadMore() {
       const data = await fetchImages(query, page, perPage);
       renderGallery(data.hits);
       simpleLightBox = new SimpleLightbox('.gallery a').refresh();
-      
-      console.log(totalPages);
-      console.log(page)
-     
     } catch(error) {
       console.log(error.massage);
     }
   }
    makeMarkup(query, page, perPage);
  }
- 
-
 
 // // кнопка “вгору”->
 arrowTop.onclick = function () {
   window.scrollTo({ top: 0, behavior: 'smooth' });
   // після scrollTo відбудеться подія "scroll", тому стрілка автоматично сховається
 };
-
 window.addEventListener('scroll', function () {
   arrowTop.hidden = scrollY < document.documentElement.clientHeight;
 });
