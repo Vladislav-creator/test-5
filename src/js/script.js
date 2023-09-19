@@ -87,9 +87,18 @@ function onloadMore() {
     }
   }
    makeMarkup(query, page, perPage);
+    // Цей код дозволяє автоматично прокручувати сторінку на висоту 2 карток галереї, коли вона завантажується
+    const { height: cardHeight } = document
+      .querySelector('.gallery')
+      .firstElementChild.getBoundingClientRect();
+  
+    window.scrollBy({
+      top: cardHeight * 2,
+      behavior: 'smooth',
+    })
  }
 
-// // кнопка “вгору”->
+// кнопка “вгору”->
 arrowTop.onclick = function () {
   window.scrollTo({ top: 0, behavior: 'smooth' });
   // після scrollTo відбудеться подія "scroll", тому стрілка автоматично сховається

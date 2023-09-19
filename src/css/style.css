@@ -68,11 +68,33 @@
     transition: all 0.3s;
   }
   
-  .load-more.is-hidden {
-    display: none;
+  @media screen and (min-width: 480px) {
+    .gallery-container {
+      width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
   
-  .container {
+  @media screen and (min-width: 768px) {
+    .gallery-container {
+      width: 768px;
+    }
+  }
+  
+  @media screen and (min-width: 1200px) {
+    .gallery-container {
+      width: 1200px;
+    }
+  }
+  
+  @media screen and (min-width: 1440px) {
+    .gallery-container {
+      width: 1440px;
+    }
+  }
+  
+  .gallery-container {
     padding-left: 15px;
     padding-right: 15px;
     padding-bottom: 20px;
